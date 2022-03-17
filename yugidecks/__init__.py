@@ -3,6 +3,13 @@ import requests
 import json
 app = Flask(__name__)
 
+req = requests.get(
+    'https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Tornado%20Dragon')
+
+# req = requests.get('https://db.ygoprodeck.com/api/v7/cardinfo.php')
+
+data = json.loads(req.content)
+
 
 @app.route("/")
 def home():
@@ -10,13 +17,13 @@ def home():
 
 
 @app.route("/cards", methods=['GET'])
-def get_cards():
-    req = requests.get(
-        'https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Tornado%20Dragon')
+def list_cards():
+    # req = requests.get(
+    #     'https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Tornado%20Dragon')
 
-    # req = requests.get('https://db.ygoprodeck.com/api/v7/cardinfo.php')
+    # # req = requests.get('https://db.ygoprodeck.com/api/v7/cardinfo.php')
 
-    data = json.loads(req.content)
+    # data = json.loads(req.content)
 
     return render_template(
         '/cards-list.html',
@@ -26,14 +33,17 @@ def get_cards():
 
 @app.route("/decks")
 def get_decks():
-
     return render_template(
         '/decks-list.html'
     )
 
 
-@app.route("/card/{id}")
-def get_card():
+@app.route("/card/<id>")
+def get_card(id):
+    for datas in data['data']:
+        name = datas['name']
     return render_template(
-        '/card.html'
+        '/card.html',
+        name=name,
+        id=id
     )
