@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-{% block title %}Single Card{% endblock %}
+{% block title %}
+{{ name }} - Single Card
+{% endblock %}
 {% block head %}
 {{ super() }}
 {% endblock %}
@@ -9,6 +11,6 @@
 {% endblock %}
 
 {% block content %}
-<h1>Single Card Name</h1>
+<h1>{{ name }}</h1>
 </div>
 {% endblock %}
