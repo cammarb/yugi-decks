@@ -49,13 +49,13 @@ def get_decks():
 @blueprint.get("/card/<id>")
 def get_card(id):
 
-    for datas in data['data']:
-        name = datas['name']
-        race = datas['race']
+    for card in cards:
+        name = card['name']
+        race = card['race']
         # attribute = datas['attribute']
         # card_sets = datas['card_sets']
-        desc = datas['desc']
-        card_prices = datas['card_prices']
+        desc = card['desc']
+        card_prices = card['card_prices']
 
     return render_template(
         'cards/card.html',
