@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}
+{{ name }} - Single Card
+{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block nav %}
+{{ super() }}
+{% endblock %}
+
+{% block header%}
+<h1>{{ name }}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-info">
+        <h4>Description:</h4>
+        <p>{{desc}}</p>
+        <h4>Race: </h4>
+        <p>{{race}}</p>
+        {% if attribute %}
+        <h4>Attribute: </h4>
+        <p>{{attribute}}</p>
+        {% endif %}
+        <h4>Price: </h4>
+        <p>${{card_prices[0]['cardmarket_price']}}</p>
+    </div>
+
+    <div class="card-sets">
+        <h4>Card Sets:</h4>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Rarity</th>
+            </tr>
+
+            {%for set in card_sets%}
+            <tr>
+                <td>{{set['set_name']}}</td>
+                <td>{{set['set_rarity']}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Cards{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block nav %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<h1>List of cards</h1>
+{{ pagination.links }}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Level</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for card in cards %}
+            <tr>
+                <td>{{ loop.index + (page - 1) * per_page }}</td>
+                <td>{{ card['name'] }}</td>
+                <td>{{ card['type'] }}</td>
+                {% if card['level'] %}
+                <td>
+                    Level: {{ card['level'] }}
+                    {% for stars in range(card['level']) %}
+                    <i class="uis uis-star" style="color: #FFE063;"></i>
+                    {% endfor %}
+                </td>
+                {% else %}
+                <td> - </td>
+                {% endif %}
+                <td>
+                    <button class="open-card-btn">
+                        <a href="/card/{{card['id']}}">See more</a>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{{ pagination.links }}
+</div>
+{% endblock %}
