@@ -9,6 +9,30 @@
 {% endblock %}
 
 {% block content %}
-<h1>My Decks</h1>
+<h1>Decks</h1>
+{{ pagination.links }}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Number of cards</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for deck in decks %}
+            <tr>
+                <td>{{ loop.index + (page - 1) * per_page }}</td>
+                <td>{{ deck['set_name'] }}</td>
+                <td>{{ deck['num_of_cards'] }}</td>
+                <td>{{ deck['tcg_date'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{{ pagination.links }}
 </div>
 {% endblock %}
